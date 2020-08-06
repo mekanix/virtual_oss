@@ -124,6 +124,18 @@ Set receive filter size in number of samples or <milliseconds>ms for the next de
 Set transmit filter size in number of samples or <milliseconds>ms for the next device to be created.
 .It Fl D Ar file
 Write process ID of virtual_oss to file.
+.It Fl x Ar knee,attack,decay
+Enable compressor and set knee, attack and decay. Knee is in the range 0..255,
+while attack and decay are between 0 and 63. Signals with volume lower than
+knee are transmitted unchanged. Signals over knee are lowered "a little bit".
+You can think about attack and decay as a measure of how fast/slow the gain of
+the compressor will work. It is advised that attack is low, so it reacts fast
+once load signals appear. It is also advised that decay is higher than attack
+so reset of the original gain is slower hence change to the signal is gradually
+changed. The reasoning behind this is that compressor should react almost
+immediately when high volume signals arrive to protect the hardware, but it
+slowly changes gain when there are no loud signals to avoid distorting the
+signal.
 .It Fl h
 Show usage and all available options.
 .El
